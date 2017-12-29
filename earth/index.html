@@ -76,9 +76,13 @@
 		}
 		//初始化光源
 		function initLight(){
-			light = new THREE.DirectionalLight(0xFF0000, 1.0, 0);
-			light.position.set(100,100,100);
-			scene.add(light);//在场景中添加光源
+			//环境光
+			light = new THREE.AmbientLight(0xFFFFFF);
+        light.position.set(100, 100, 200);
+        scene.add(light);
+			// light = new THREE.DirectionalLight(0xFFFFFF, 1.0, 0);
+			// light.position.set(100,100,100);
+			// scene.add(light);//在场景中添加光源
 		}
 		//初始化地球
 		var earthMesh;//地球体
@@ -86,6 +90,7 @@
 			var earth = new THREE.SphereGeometry(200, 100, 100);
 			var material = new THREE.MeshPhongMaterial({
 				map: new THREE.TextureLoader().load('../assets/images/earth.jpg'),
+				color: '0xffffff',
        	side: THREE.DoubleSide
 			});
 			earthMesh = new THREE.Mesh(earth, material);
@@ -98,7 +103,7 @@
         var material = new THREE.MeshPhongMaterial({
             alphaMap: new THREE.TextureLoader().load('../assets/images/clouds.jpg'),
             transparent: true,
-            opacity: 0.2
+            opacity: 0.5
         });
         cloudsMesh = new THREE.Mesh(cloud, material);
         scene.add(cloudsMesh);
@@ -126,7 +131,7 @@
 				initCamera();
 				initScene();
 				initLight();
-				initObject();
+				// initObject();
 				initEarth();
 				initCloud();
 				initControls();
